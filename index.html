@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Number Smash</title>
+
+<!-- 크롤러(카톡·X·디스코드)는 JS를 안 돌린다. 공유 카드는 전적으로 이 태그들로 만들어진다. -->
+<meta property="og:title" content="Number Smash">
+<meta property="og:description" content="1부터 50까지, 얼마나 빨리 부술 수 있나?">
+<meta property="og:image" content="https://numbersmash.github.io/og.png">
+<meta property="og:url" content="https://numbersmash.github.io/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  html,body{height:100%;margin:0}
+  body{display:grid;place-items:center;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",system-ui,sans-serif;
+       background:#221f20;color:#f2ede6;text-align:center;padding:24px}
+  a{color:#f2ede6}
+  .fallback{opacity:0;animation:in .3s ease .8s forwards}
+  @keyframes in{to{opacity:1}}
+</style>
+</head>
+<body>
+
+<div class="fallback">
+  <p>스토어로 이동 중…</p>
+  <p><a id="manual" href="https://linktr.ee/playburiburi">눌러도 안 넘어가면 여기</a></p>
+</div>
+
+<script>
+(function () {
+  // ── 여기만 채우면 된다 ────────────────────────────────────────
+  var ANDROID = 'https://play.google.com/store/apps/details?id=com.playburiburi.numbersmash';
+  var IOS     = 'https://apps.apple.com/app/id0000000000';   // ASC에서 앱 레코드 만들면 나오는 숫자 ID
+  var OTHER   = 'https://linktr.ee/playburiburi';            // PC·기타
+  // ─────────────────────────────────────────────────────────────
+
+  var ua = navigator.userAgent;
+
+  // iPadOS 13+ Safari는 UA를 Mac으로 보고한다. 터치 포인트로 갈라낸다.
+  var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+              (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+
+  // 'Android'만 보면 안 된다. Windows 태블릿의 일부 UA에 섞여 들어온다.
+  var isAndroid = /Android/.test(ua) && !/Windows Phone/.test(ua);
+
+  var target = isIOS ? IOS : isAndroid ? ANDROID : OTHER;
+
+  // ?utm_source=... 같은 걸 달아 보내면 스토어까지 그대로 넘긴다.
+  var q = location.search.slice(1);
+  if (q) {
+    if (target === ANDROID) {
+      // Play는 캠페인 정보를 referrer 한 덩어리로 받는다(설치 후 앱이 읽을 수 있다).
+      target += '&referrer=' + encodeURIComponent(q);
+    } else if (target === OTHER) {
+      target += (target.indexOf('?') < 0 ? '?' : '&') + q;
+    }
+    // App Store는 pt/ct/mt만 받으므로 아무거나 붙이지 않는다.
+  }
+
+  document.getElementById('manual').href = target;
+  // replace를 쓴다. 뒤로 가기가 이 페이지로 돌아와 무한 루프가 되지 않도록.
+  location.replace(target);
+})();
+</script>
+</body>
+</html>

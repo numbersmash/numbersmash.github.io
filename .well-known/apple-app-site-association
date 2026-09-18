@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["38N4DLLKLP.com.playburiburi.numbersmash"],
+        "components": [
+          { "/": "/j/" },
+          { "/": "/j/*" }
+        ]
+      }
+    ]
+  }
+}

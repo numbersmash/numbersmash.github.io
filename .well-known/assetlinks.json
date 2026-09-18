@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.playburiburi.numbersmash",
+      "sha256_cert_fingerprints": [
+        "69:72:DD:78:CF:71:FF:63:BB:B1:84:F9:93:2F:53:61:22:B3:08:43:09:3B:55:53:8B:83:B3:16:7F:E0:D7:09",
+        "0B:72:B5:81:83:6F:7C:C8:38:37:24:93:08:E1:AB:C5:30:58:8B:B0:1F:C6:41:B9:48:C4:76:DA:57:3E:67:57"
+      ]
+    }
+  }
+]

@@ -92,11 +92,11 @@
               : isAndroid ? ANDROID + '&referrer=' + encodeURIComponent(payload)
               : OTHER;
 
-  // 안드로이드는 intent:// 가 정석이다 — 앱이 있으면 열고, 없으면 fallback으로 되돌아온다.
+  // 안드로이드는 intent:// 가 정석이다 — 앱이 있으면 열고, 없으면 Play로 바로 간다(referrer에 코드가 실려 설치 후 첫 실행에 자동 입장).
   // 카톡 인앱 브라우저에서도 이건 동작한다(커스텀 스킴은 막혀 있다).
   var intentUrl = 'intent://j/?' + payload + '#Intent;scheme=' + SCHEME +
                   ';package=' + ANDROID_ID +
-                  ';S.browser_fallback_url=' + encodeURIComponent(self + '&x=1') + ';end';
+                  ';S.browser_fallback_url=' + encodeURIComponent(store) + ';end';
   var launch = isAndroid ? intentUrl : appUrl;
 
   // ── 화면 ──────────────────────────────────────────────────────
